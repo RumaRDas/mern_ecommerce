@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 //import routes
@@ -15,6 +17,9 @@ mongoose
   })
   .then(() => console.log("Database Conntcted"));
 
+//middlewares
+app.use(morgan("dev"));
+app.use(bodyParser.json());
 //routes middleware
 app.use("/api", userRoutes);
 const port = process.env.PORT || 8000;
